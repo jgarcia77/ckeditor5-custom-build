@@ -3,13 +3,15 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 import ContextBase from '@ckeditor/ckeditor5-core/src/context';
+import ContextPlugin from '@ckeditor/ckeditor5-core/src/contextplugin';
 import ContextWatchdog from '@ckeditor/ckeditor5-watchdog/src/contextwatchdog';
-import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import CloudServices from '@ckeditor/ckeditor5-cloud-services/src/cloudservices.js';
 import Comments from '@ckeditor/ckeditor5-comments/src/comments.js';
+import CommentsRepository from '@ckeditor/ckeditor5-comments/src/comments/commentsrepository';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js';
@@ -29,11 +31,14 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 
 class Context extends ContextBase {}
-class Editor extends ClassicEditor {}
+class ClassicEditor extends ClassicEditorBase {}
 
+Context.builtinPlugins = [
+	CommentsRepository
+];
 
 // Plugins to include in the build.
-Editor.builtinPlugins = [
+ClassicEditor.builtinPlugins = [
 	Autoformat,
 	BlockQuote,
 	Bold,
@@ -58,8 +63,8 @@ Editor.builtinPlugins = [
 	TextTransformation,
 ];
 
-// Editor configuration.
-Editor.defaultConfig = {
+// ClassicEditor configuration.
+ClassicEditor.defaultConfig = {
 	toolbar: {
 		items: [
 			'heading',
@@ -117,4 +122,11 @@ Editor.defaultConfig = {
 };
 
 
-export default { Editor, Context, ContextWatchdog };
+const Editor = {
+	ClassicEditor: ClassicEditor,
+	Context,
+	ContextPlugin,
+	ContextWatchdog
+};
+
+export default Editor;
