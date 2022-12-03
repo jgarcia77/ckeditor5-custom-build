@@ -33,6 +33,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import CommentingContext from './CommentingContext';
 
 class Context extends ContextBase {}
+class CommentsContext extends ContextBase {}
 class ClassicEditor extends ClassicEditorBase {}
 
 Context.builtinPlugins = [
@@ -41,6 +42,23 @@ Context.builtinPlugins = [
 ];
 
 Context.defaultConfig = {
+	comments: {
+		editorConfig: {
+			extraPlugins: [
+				Bold,
+				Italic,
+				List,
+				Autoformat
+			]
+		}
+	}
+};
+
+CommentsContext.builtinPlugins = [
+	CommentsRepository
+];
+
+CommentsContext.defaultConfig = {
 	comments: {
 		editorConfig: {
 			extraPlugins: [
@@ -124,12 +142,23 @@ ClassicEditor.defaultConfig = {
 		tableToolbar: [
 			'comment'
 		]
+	},
+	comments: {
+		editorConfig: {
+			extraPlugins: [
+				Bold,
+				Italic,
+				List,
+				Autoformat
+			]
+		}
 	}
 };
 
 export default {
 	ClassicEditor,
 	Context,
+	CommentsContext,
 	ContextPlugin,
 	ContextWatchdog
 };
