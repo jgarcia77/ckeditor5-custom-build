@@ -57,7 +57,10 @@
             const watchdog = new ContextWatchdog( Context );
 
             const contextConfiguration = {
-				licenseKey: 'SsCD/VMf4oJy+RRwL7IFxIQAmjOs3z/I9a5AF6B4lDUGTo2392iE'
+				licenseKey: 'SsCD/VMf4oJy+RRwL7IFxIQAmjOs3z/I9a5AF6B4lDUGTo2392iE',
+                sidebar: {
+                    container: document.querySelector( '#sidebar' )
+                }
             };
 
             await watchdog.create( contextConfiguration );
