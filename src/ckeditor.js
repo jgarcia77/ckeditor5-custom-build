@@ -30,12 +30,28 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 
+import CommentingContext from './CommentingContext';
+
 class Context extends ContextBase {}
 class ClassicEditor extends ClassicEditorBase {}
 
 Context.builtinPlugins = [
-	CommentsRepository
+	CommentsRepository,
+	CommentingContext
 ];
+
+Context.defaultConfig = {
+	comments: {
+		editorConfig: {
+			extraPlugins: [
+				Bold,
+				Italic,
+				List,
+				Autoformat
+			]
+		}
+	}
+};
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
@@ -108,25 +124,12 @@ ClassicEditor.defaultConfig = {
 		tableToolbar: [
 			'comment'
 		]
-	},
-	comments: {
-		editorConfig: {
-			extraPlugins: [
-				Bold,
-				Italic,
-				List,
-				Autoformat
-			]
-		}
 	}
 };
 
-
-const Editor = {
-	ClassicEditor: ClassicEditor,
+export default {
+	ClassicEditor,
 	Context,
 	ContextPlugin,
 	ContextWatchdog
 };
-
-export default Editor;
