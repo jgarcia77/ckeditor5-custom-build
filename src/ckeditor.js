@@ -30,10 +30,14 @@ import Table from '@ckeditor/ckeditor5-table/src/table.js';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 
+import NarrowSidebar from '@ckeditor/ckeditor5-comments/src/annotations/narrowsidebar';
+import WideSidebar from '@ckeditor/ckeditor5-comments/src/annotations/widesidebar';
+
 import CommentingContext from './CommentingContext';
 
 class Context extends ContextBase {}
 class CommentsContext extends ContextBase {}
+class ChronCommentsContext extends ContextBase {}
 class ClassicEditor extends ClassicEditorBase {}
 
 Context.builtinPlugins = [
@@ -59,6 +63,25 @@ CommentsContext.builtinPlugins = [
 ];
 
 CommentsContext.defaultConfig = {
+	comments: {
+		editorConfig: {
+			extraPlugins: [
+				Bold,
+				Italic,
+				List,
+				Autoformat
+			]
+		}
+	}
+};
+
+ChronCommentsContext.builtinPlugins = [
+	CommentsRepository,
+	NarrowSidebar,
+	WideSidebar
+];
+
+ChronCommentsContext.defaultConfig = {
 	comments: {
 		editorConfig: {
 			extraPlugins: [
@@ -159,6 +182,7 @@ export default {
 	ClassicEditor,
 	Context,
 	CommentsContext,
+	ChronCommentsContext,
 	ContextPlugin,
 	ContextWatchdog
 };
