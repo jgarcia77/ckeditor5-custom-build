@@ -56,10 +56,15 @@
 
             const watchdog = new ContextWatchdog( Context );
 
+            const channelId = 'channel-1';
+
             const contextConfiguration = {
 				licenseKey: 'SsCD/VMf4oJy+RRwL7IFxIQAmjOs3z/I9a5AF6B4lDUGTo2392iE',
                 sidebar: {
                     container: document.querySelector( '#sidebar' )
+                },
+                collaboration: {
+                    channelId
                 }
             };
 
@@ -70,7 +75,12 @@
                     id: editorElement.id,
                     type: 'editor',
                     sourceElementOrData: editorElement,
-                    config: {},
+                    config: {
+                        collaboration: {
+                            // Create a unique channel ID for an editor (document).
+                            channelId: channelId + '-' + editorElement.id
+                        }
+                    },
                     creator: ( element, config ) => Editor.create( element, config )
                 } );
             }
