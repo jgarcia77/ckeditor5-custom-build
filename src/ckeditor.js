@@ -38,6 +38,7 @@ import CommentingContext from './CommentingContext';
 class Context extends ContextBase {}
 class CommentsContext extends ContextBase {}
 class ChronCommentsContext extends ContextBase {}
+class FieldCommentsContext extends ContextBase {}
 class ClassicEditor extends ClassicEditorBase {}
 
 Context.builtinPlugins = [
@@ -82,6 +83,25 @@ ChronCommentsContext.builtinPlugins = [
 ];
 
 ChronCommentsContext.defaultConfig = {
+	comments: {
+		editorConfig: {
+			extraPlugins: [
+				Bold,
+				Italic,
+				List,
+				Autoformat
+			]
+		}
+	}
+};
+
+FieldCommentsContext.builtinPlugins = [
+	CommentsRepository,
+	NarrowSidebar,
+	WideSidebar
+];
+
+FieldCommentsContext.defaultConfig = {
 	comments: {
 		editorConfig: {
 			extraPlugins: [
@@ -183,6 +203,7 @@ export default {
 	Context,
 	CommentsContext,
 	ChronCommentsContext,
+	FieldCommentsContext,
 	ContextPlugin,
 	ContextWatchdog
 };
